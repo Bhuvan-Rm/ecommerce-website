@@ -1,5 +1,5 @@
 
-  export default {"products": [
+const DummyProduct =  {"products": [
     {
       "id": 1,
       "title": "iPhone 9",
@@ -557,3 +557,6 @@
   "skip": 0,
   "limit": 30
   }
+
+
+  export default DummyProduct
