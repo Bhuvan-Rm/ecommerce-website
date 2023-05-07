@@ -1,18 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import productData from "../data/DummyProduct";
 
- function Product() {
+function Product(props) {
     const productsArr = productData.products
 
-    const [count,setCount] = React.useState(0)
 
-    function add(){
-        setCount(prevCount => prevCount+1)
-        console.log(count)
+    const [productCount, setproductCount] = React.useState([{ id: 0, count: 0 }])
+
+    // ✅ Find the first object that matches a condition
+    function pCount(pid){
+        return productCount.find(obj => {return obj.id === pid;});
     }
-    function remove(){
-        setCount(prevCount => prevCount-1)
-        console.log(count)
+    // 
+
+    function add(pid) {
+
+        // ✅ Add an object to a state array
+        const addObjectToArray = obj => {
+            setproductCount(current => [...current,
+            {
+                id: pid,
+                count: 1
+            }
+            ]);
+        };
+        // ✅ Update one or more objects in a state array
+        const updateObjectInArray = () => {
+            setproductCount(current =>
+                current.map(obj => {
+                    if (obj.id === pid) {
+                        return { ...obj, count: obj.count + 1 };
+                    }
+                    return obj
+                })
+
+            );
+        };
+
+        // ✅ Find the first object that matches a condition
+        const found = productCount.find(obj => {
+            return obj.id === pid;
+        });
+
+        found ? updateObjectInArray() : addObjectToArray()
+    }
+
+    function remove(pid) {
+
+        // ✅ Remove one or more objects from state array
+        setproductCount(current =>
+            current.filter(obj => {
+                return obj.id !== pid;
+            }),
+        );
+
     }
 
     const productListPage = productsArr.map(product => {
@@ -26,9 +67,9 @@ import productData from "../data/DummyProduct";
                     <p className="desc">{product.description}</p>
                 </div>
                 <div id="counter" className="counter">
-                    <img src="https://img.icons8.com/fluency/48/null/minus.png" alt="minus-icon" onClick={remove}/>
-                    <p id="count">{count}</p>
-                    <img src="https://img.icons8.com/fluency/48/null/add.png" alt="plus-icon" onClick={add}/>
+                    <img src="https://img.icons8.com/fluency/48/null/minus.png" alt="minus-icon" onClick={() => remove(product.id)} />
+                    <p id="count">{pCount(product.id)? pCount(product.id).count : 0 }</p>
+                    <img src="https://img.icons8.com/fluency/48/null/add.png" alt="plus-icon" onClick={() => add(product.id)} />
                 </div>
                 <p><button>Add to Cart</button></p>
             </div>
