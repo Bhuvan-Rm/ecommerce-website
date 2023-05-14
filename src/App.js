@@ -1,21 +1,40 @@
 
-import {useState} from 'react';
+import { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Products from './components/Products';
+import ProductLanding from './components/ProductLandingPage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 
 
 function App() {
 
   // setting state for maintaining the order item throught out the website
-  const [orderItems,setOrderItems] = useState([])
+  // const [orderItems, setOrderItems] = useState([])
   // <Test/>
+  // return (
+  //   <div className="App">
+  //     <Header />
+  //     <Products orderItems={orderItems} />
+  //   </div>
+
+  // );
+
   return (
-    <div className="App">
-        <Header/>
-        <Products orderItems={orderItems}/>
-    </div>
-  );
+
+    <Router>
+      <div>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Products />} />
+          <Route path="/product/:id" element={<ProductLanding />} />
+        </Routes>
+      </div>
+    </Router>
+
+
+  )
 }
 
 export default App;

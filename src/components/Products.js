@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import productData from "../data/DummyProduct";
+import { Link } from 'react-router-dom';
 
 function Product(props) {
     const productsArr = productData.products
@@ -8,8 +9,8 @@ function Product(props) {
     const [productCount, setproductCount] = React.useState([{ id: 0, count: 0 }])
 
     // ✅ Find the first object that matches a condition
-    function pCount(pid){
-        return productCount.find(obj => {return obj.id === pid;});
+    function pCount(pid) {
+        return productCount.find(obj => { return obj.id === pid; });
     }
     // 
 
@@ -62,13 +63,15 @@ function Product(props) {
             <div className="product-card" key={product.id}>
                 <img src={product.thumbnail} alt={product.title} className="thumbnail" />
                 <div className="product-details">
-                    <a className="title" href="https://img.icons8.com/fluency/48/null/minus.png"><strong>{product.title}</strong></a>
+                    <Link to={`/product/${product.id}`} className="title">
+                        <strong>{product.title}</strong>
+                    </Link>
                     <p className="price">{"$" + product.price}</p>
                     <p className="desc">{product.description}</p>
                 </div>
                 <div id="counter" className="counter">
                     <img src="https://img.icons8.com/fluency/48/null/minus.png" alt="minus-icon" onClick={() => remove(product.id)} />
-                    <p id="count">{pCount(product.id)? pCount(product.id).count : 0 }</p>
+                    <p id="count">{pCount(product.id) ? pCount(product.id).count : 0}</p>
                     <img src="https://img.icons8.com/fluency/48/null/add.png" alt="plus-icon" onClick={() => add(product.id)} />
                 </div>
                 <p><button>Add to Cart</button></p>
