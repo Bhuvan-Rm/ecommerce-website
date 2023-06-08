@@ -5,6 +5,8 @@ import Header from './components/Header';
 import Products from './components/Products';
 import ProductLanding from './components/ProductLandingPage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import CartPage from './components/CartPage';
+import CheckoutPage from './components/CheckoutPage';
 
 
 
@@ -26,10 +28,12 @@ function App() {
     <Router>
       <div>
         <Header />
-        <Routes>
+        {/* <Routes>
           <Route path="/" element={<Products />} />
           <Route path="/product/:id" element={<ProductLanding />} />
-        </Routes>
+        </Routes> */}
+        <CartPage/>
+        {/* <CheckoutPage/> */}
       </div>
     </Router>
 
