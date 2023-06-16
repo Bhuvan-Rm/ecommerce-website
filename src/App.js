@@ -28,11 +28,11 @@ function App() {
     <Router>
       <div>
         <Header />
-        {/* <Routes>
+        <Routes>
           <Route path="/" element={<Products />} />
           <Route path="/product/:id" element={<ProductLanding />} />
-        </Routes> */}
-        <CartPage/>
+        </Routes>
+{/* <CartPage/>*/}
         {/* <CheckoutPage/> */}
       </div>
     </Router>
